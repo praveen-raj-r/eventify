@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { PenBox } from "lucide-react";
-// import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import UserMenu from "./user-menu";
 
 function Header() {
   return (
@@ -24,15 +25,14 @@ function Header() {
             <span className="hidden sm:inline">Create Event</span>
           </Button>
         </Link>
-        <Button variant="outline">Login</Button>
-        {/* <SignedOut>
+        <SignedOut>
           <SignInButton forceRedirectUrl="/dashboard">
             <Button variant="outline">Login</Button>
           </SignInButton>
         </SignedOut>
         <SignedIn>
           <UserMenu />
-        </SignedIn> */}
+        </SignedIn>
       </div>
     </nav>
   );
