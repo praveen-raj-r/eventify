@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ArrowRight, Calendar, Clock, LinkIcon } from "lucide-react";
-// import TestimonialsCarousel from "@/components/testimonials";
+import TestimonialsCarousel from "@/components/testimonials";
 import Link from "next/link";
 
 const features = [
@@ -25,14 +25,14 @@ const features = [
 ];
 
 const howItWorks = [
-  { step: "Sign Up", description: "Create your free Schedulrr account" },
+  { step: "Sign Up", description: "Create your free Eventify account" },
   {
     step: "Set Availability",
     description: "Define when you're available for meetings",
   },
   {
     step: "Share Your Link",
-    description: "Send your scheduling link to clients or colleagues",
+    description: "Send your events scheduling link to clients or colleagues",
   },
   {
     step: "Get Booked",
@@ -47,10 +47,10 @@ const Home = () => {
       <div className="flex flex-col items-center justify-between gap-12 mb-24 lg:flex-row">
         <div className="lg:w-1/2">
           <h1 className="pb-6 font-extrabold text-7xl gradient-title">
-            Simplify Your Scheduling
+            Simplify Your Events Scheduling
           </h1>
           <p className="mb-10 text-xl text-gray-600">
-            Schedulrr helps you manage your time effectively. Create events, set
+            Eventify helps you manage your time effectively. Create events, set
             your availability, and let others book time with you seamlessly.
           </p>
           <Link href={"/dashboard"}>
@@ -100,7 +100,7 @@ const Home = () => {
         <h2 className="mb-12 text-3xl font-bold text-center text-blue-600">
           What Our Users Say
         </h2>
-        {/* <TestimonialsCarousel /> */}
+        <TestimonialsCarousel />
       </div>
 
       {/* How It Works Section */}
@@ -126,10 +126,10 @@ const Home = () => {
       {/* CTA Section */}
       <div className="p-8 text-center text-white bg-blue-600 rounded-lg">
         <h2 className="mb-4 text-3xl font-bold">
-          Ready to Simplify Your Scheduling?
+          Ready to Simplify Your Events Scheduling
         </h2>
         <p className="mb-6 text-xl">
-          Join thousands of professionals who trust Schedulrr for efficient time
+          Join thousands of professionals who trust Eventify for efficient time
           management.
         </p>
         <Link href={"/dashboard"}>
