@@ -27,9 +27,7 @@ export async function getUserAvailability() {
     },
   });
 
-  if (!user || !user.availability) {
-    return null;
-  }
+  if (!user || !user.availability) return null;
 
   // Transform the availability data into the format expected by the form
   const availabilityData = { timeGap: user.availability.timeGap };
@@ -73,9 +71,7 @@ export async function updateAvailability(data) {
     include: { availability: true },
   });
 
-  if (!user) {
-    throw new Error("User not found");
-  }
+  if (!user) throw new Error("User not found");
 
   const availabilityData = Object.entries(data).flatMap(
     ([day, { isAvailable, startTime, endTime }]) => {
@@ -143,9 +139,7 @@ export async function getEventAvailability(eventId) {
     },
   });
 
-  if (!event || !event.user.availability) {
-    return [];
-  }
+  if (!event || !event.user.availability) return [];
 
   const { availability, bookings } = event.user;
   const startDate = startOfDay(new Date());
@@ -190,15 +184,18 @@ function generateAvailableTimeSlots(
   timeGap = 0
 ) {
   const slots = [];
+
   let currentTime = parseISO(
     `${dateStr}T${startTime.toISOString().slice(11, 16)}`
   );
+
   const slotEndTime = parseISO(
     `${dateStr}T${endTime.toISOString().slice(11, 16)}`
   );
 
   // If the date is today, start from the next available slot after the current time
   const now = new Date();
+
   if (format(now, "yyyy-MM-dd") === dateStr) {
     currentTime = isBefore(currentTime, now)
       ? addMinutes(now, timeGap)
@@ -211,6 +208,7 @@ function generateAvailableTimeSlots(
     const isSlotAvailable = !bookings.some((booking) => {
       const bookingStart = booking.startTime;
       const bookingEnd = booking.endTime;
+
       return (
         (currentTime >= bookingStart && currentTime < bookingEnd) ||
         (slotEnd > bookingStart && slotEnd <= bookingEnd) ||
@@ -218,9 +216,7 @@ function generateAvailableTimeSlots(
       );
     });
 
-    if (isSlotAvailable) {
-      slots.push(format(currentTime, "HH:mm"));
-    }
+    if (isSlotAvailable) slots.push(format(currentTime, "HH:mm"));
 
     currentTime = slotEnd;
   }
