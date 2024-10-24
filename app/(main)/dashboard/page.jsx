@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usernameSchema } from "@/app/lib/validators";
 import { useEffect } from "react";
+import useFetch from "@/hooks/use-fetch";
+import { updateUsername } from "@/actions/users";
+import { BarLoader } from "react-spinners";
 
 function Dashboard() {
   const { isLoaded, user } = useUser();
@@ -23,6 +26,8 @@ function Dashboard() {
   useEffect(() => {
     setValue("username", user?.username);
   }, [isLoaded]);
+
+  const { loading, error, fn: fnUpdateUsername } = useFetch(updateUsername);
 
   const onSubmit = async (data) => {
     await fnUpdateUsername(data.username);
@@ -52,7 +57,13 @@ function Dashboard() {
                   {errors.username.message}
                 </p>
               )}
+              {error && (
+                <p className="mt-1 text-sm text-red-500">{error?.message}</p>
+              )}
             </div>
+            {loading && (
+              <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
+            )}
             <Button type="submit" disabled={false}>
               Update Username
             </Button>
